@@ -1,1 +1,124 @@
-<p>product-page works!</p>
+<div class="container text-center">
+  <h4 class="my-3">Search for products</h4>
+  <div class="input-group">
+    <div class="row col-8 mx-auto px-0">
+      <input
+        type="text"
+        class="form-control col-7 px-0"
+        aria-label="Text input with dropdown button"
+        [(ngModel)]="currentSearch"
+      />
+
+      <div class="input-group-append">
+        <button
+          class="btn btn-outline-secondary dropdown-toggle mx-2"
+          type="button"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          {{ currentProductType | titlecase }}
+        </button>
+        <div class="dropdown-menu">
+          <a
+            class="dropdown-item"
+            *ngFor="let type of allProductTypes"
+            (click)="currentProductType = type"
+            >{{ type | titlecase }}</a
+          >
+        </div>
+        <button
+          type="button"
+          class="btn btn-outline-primary mx-2"
+          [disabled]="!this.currentSearch || !currentProductType"
+          (click)="getProductsByNameAndType(currentSearch, currentProductType)"
+        >
+          Search
+        </button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="noProductsFound">
+    <p class="mt-5">No Products we're found With This Name And Type</p>
+  </div>
+  <table class="table product-list" *ngIf="searchedProducts?.length > 0">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Type</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Add</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of this.searchedProducts">
+        <td>{{ product.name }}</td>
+        <td>{{ product.description }}</td>
+        <td>{{ product.type | titlecase }}</td>
+        <td>
+          <input
+            type="quantity"
+            id="quantityInput"
+            class="form-control quantity-input"
+            placeholder="Quantity"
+            required
+            autofocus
+            [(ngModel)]="product.quantity"
+          />
+        </td>
+        <td>
+          <button
+            [disabled]="!product.quantity || product.quantity < 1"
+            type="button"
+            class="btn btn-sm btn-outline-info"
+            (click)="addProductToBasket(product)"
+          >
+            Add to basket
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <ng-container *ngIf="this.currentBasket?.products.length > 0">
+    <h4 class="my-4">Current Basket</h4>
+    <table
+      class="table basket-list"
+      *ngIf="this.currentBasket.products?.length > 0"
+    >
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Description</th>
+          <th scope="col">Type</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of this.currentBasket.products">
+          <td>{{ product.name }}</td>
+          <td>{{ product.description }}</td>
+          <td>{{ product.type | titlecase }}</td>
+          <td>{{ product.quantity }}</td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-sm btn-outline-info"
+              (click)="removeProductFromBasket(product)"
+            >
+              Remove from basket
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button
+      type="button"
+      class="btn btn-outline-success"
+      (click)="saveBasket()"
+    >
+      Save Basket
+    </button>
+  </ng-container>
+</div>

@@ -4,4 +4,9 @@ export class Product {
   name: string;
   type: string;
   description: string;
+  quantity: number;
+
+  constructor() {
+
+  }
 }

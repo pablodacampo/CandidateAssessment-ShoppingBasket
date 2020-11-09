@@ -1,0 +1,18 @@
+PRODUCTS PAGE
+- search input (name - text, type - dropdown (*ngFor=, create enum!!)), search button 2H
+- table (*ngIf="results") -
+- - name, type, description, quantity (textbox), buy button) 1.5H
+-CSS (table of results) (cm-10 for table) -
+
+
+BASKET table
+- Product name, type, quantity ordered, delete button
+- Button 'confirm order' -> alert('order confirmed') - 1h
+-CSS - 15m
+
+PRODUCTS
+- If product doesn't exit - display messaeg 'no products found', search box empties - 30m
+- If product has already been purchased - alert('Product already purchased') 1h
+
+
+

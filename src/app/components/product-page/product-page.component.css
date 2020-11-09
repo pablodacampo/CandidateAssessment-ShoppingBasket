@@ -1,0 +1,12 @@
+a:hover {
+  cursor: pointer;
+}
+
+.product-list {
+  margin-top: 40px;
+  text-align: left;
+}
+
+.quantity-input {
+  width: 100px;
+}

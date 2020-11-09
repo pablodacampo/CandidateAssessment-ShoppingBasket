@@ -34,6 +34,16 @@ export class DataService implements InMemoryDbService {
       { id: 20, name: 'RadioHead', type: 'Music', description: 'Rock'},
     ];
 
-    return {users, products};
+    const baskets = [
+      { id: 1,
+        userId: 120,
+        products: [
+          { id: 20, name: 'RadioHead', type: 'Music', description: 'Rock'}
+        ]
+      } ];
+
+    return {users, products, baskets};
   }
 }
+
+// TODO: Find out why baskets are being saved.

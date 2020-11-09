@@ -8,13 +8,18 @@ import { HttpClient } from '@angular/common/http';
 })
 export class UserService {
 
+  currentUser: User;
+
   constructor( private http: HttpClient ) {
   }
 
   private usersUrl = 'api/users';
 
-  getUserByLogin(loginName: string, password: string): Observable<User> {
-    return this.http.get<User>(`${this.usersUrl}/?loginName=${loginName}&password=${password}`);
+  getUserById(id: number): Observable<User> {
+    return this.http.get<User>(`${this.usersUrl}/${id}`);
+  }
+  getUserByLogin(loginName: string, password: string): Observable<User[]> {
+    return this.http.get<User[]>(`${this.usersUrl}/?loginName=${loginName}&password=${password}`);
   }
 
 }
